@@ -2,10 +2,12 @@ package com.example.week4_160420034_christian.view
 
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
@@ -19,6 +21,11 @@ import com.example.week4_160420034_christian.viewmodel.DetailViewModel
 import com.example.week4_160420034_christian.viewmodel.ListViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class StudentDetailFragment : Fragment() {
     private lateinit var viewModel: DetailViewModel
@@ -56,6 +63,18 @@ class StudentDetailFragment : Fragment() {
             txtName?.setText(it.name)
             txtBOD?.setText(it.dob)
             txtPhone?.setText(it.phone)
+            val student = it
+            val btnNotif = view?.findViewById<Button>(R.id.btnNotif)
+            btnNotif?.setOnClickListener{
+                Observable.timer(5, TimeUnit.SECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        Log.d("Messages", "Five Second")
+                        MainActivity.showNotif(student.name.toString(),
+                            "A new notification created", R.drawable.baseline_error_24)
+                    }
+            }
         })
     }
 }
