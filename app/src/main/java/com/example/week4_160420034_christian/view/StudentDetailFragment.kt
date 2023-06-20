@@ -65,11 +65,11 @@ class StudentDetailFragment : Fragment() {
         val txtName = view?.findViewById<TextView>(R.id.txtName)
         val txtBOD = view?.findViewById<TextView>(R.id.txtBOD)
         val txtPhone = view?.findViewById<TextView>(R.id.txtPhone)*/
-        val imageView2 = view?.findViewById<ImageView>(R.id.imageView2)
+        //val imageView2 = view?.findViewById<ImageView>(R.id.imageView2)
 
         viewModel.studentLD.observe(viewLifecycleOwner, Observer {
             dataBinding.student = it
-            Picasso.get().load(it.photoUrl).resize(400, 400).into(imageView2)
+            //Picasso.get().load(it.photoUrl).resize(400, 400).into(imageView2)
             /*txtId?.setText(it.id)
             txtName?.setText(it.name)
             txtBOD?.setText(it.dob)
