@@ -35,7 +35,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
         studentLoadErrorLD.value = false
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://adv.jitusolution.com/student.php?id=$id"
+        val url = "http://jitusolution.com/student.php?id=$id"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,
